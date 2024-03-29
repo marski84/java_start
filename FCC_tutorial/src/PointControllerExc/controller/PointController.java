@@ -1,6 +1,6 @@
-package PointControllerExc.PointController;
+package PointControllerExc.controller;
 
-import PointControllerExc.Point.Point;
+import PointControllerExc.data.Point;
 
 public class PointController {
     public PointController(){}

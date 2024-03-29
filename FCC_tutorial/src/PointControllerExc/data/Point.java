@@ -1,4 +1,4 @@
-package PointControllerExc.Point;
+package PointControllerExc.data;
 
 public class Point {
     private int x;

@@ -1,7 +1,7 @@
-package PointControllerExc;
+package PointControllerExc.app;
 
-import PointControllerExc.Point.Point;
-import PointControllerExc.PointController.PointController;
+import PointControllerExc.data.Point;
+import PointControllerExc.controller.PointController;
 
 public class PointApplication {
     public static void main(String[] args) {

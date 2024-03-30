@@ -1,4 +1,6 @@
-package app;
+package library.app;
+
+import library.model.Book;
 
 class Library {
     public static void main(String[] args) {

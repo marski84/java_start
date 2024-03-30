@@ -22,4 +22,19 @@ public class PointController {
         int newValue = point.getY() - 1;
         point.setY(newValue);
     }
-}
+
+    public void moveXY(Point point, int param) throws Exception {
+        switch (param) {
+            case 0 -> {
+                point.setX(10);
+                point.setY(20);
+            }
+            case 1 -> {
+                point.setX(300);
+                point.setY(200);
+            }
+            default -> throw new Exception("asda");
+        }
+        }
+    }
+

@@ -1,6 +1,6 @@
-package app;
+package library.model;
 
-class Book {
+public class Book {
     private String title;
     private String author;
     private int releaseDate;
@@ -8,12 +8,12 @@ class Book {
     private String publisher;
     private String isbn;
 
-    Book(String title, String author, int releaseDate, int pages, String publisher, String isbn) {
+    public Book(String title, String author, int releaseDate, int pages, String publisher, String isbn) {
         this(title, author, releaseDate, pages, publisher);
         this.isbn = isbn;
     }
 
-    Book(String title, String author, int releaseDate, int pages, String publisher) {
+    public Book(String title, String author, int releaseDate, int pages, String publisher) {
         this.title = title;
         this.author = author;
         this.releaseDate = releaseDate;
@@ -72,9 +72,13 @@ class Book {
 
 
 
-    void printInfo() {
+    public void printInfo() {
         String info = title + "; " + author + "; " + releaseDate + "; "
-                + pages + "; " + publisher + "; " + isbn;
+                + pages + "; " + publisher;
+
+        if (this.isbn != null) {
+            info = info + "; " + isbn;
+        }
         System.out.println(info);
     }
 }

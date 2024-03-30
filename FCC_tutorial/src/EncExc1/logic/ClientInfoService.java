@@ -10,7 +10,10 @@ public class ClientInfoService {
             String clientLastName = client.getLastName();
             if (clientFirstName == null && clientLastName == null) {
                 return this.getInfoIfAllDataIsNull();
-            } else if (clientFirstName == null) {
+            } else if (clientFirstName != null && clientLastName != null) {
+                return getInfoIfAllDataNotNull(clientFirstName, clientLastName);
+            }
+            else if (clientFirstName == null) {
                 return this.getInfoIfFirstNameIsNull(clientLastName);
             } else if (clientLastName == null) {
                 return this.getInfoIfLastNameIsNull(clientFirstName);
@@ -22,6 +25,10 @@ public class ClientInfoService {
 
     private String getInfoIfAllDataIsNull() {
         return "Witaj nieznajomy";
+    }
+
+    private String getInfoIfAllDataNotNull(String firstname, String lastName) {
+        return "Witaj " + firstname + " " + lastName;
     }
 
     private String getInfoIfFirstNameIsNull(String lastName) {

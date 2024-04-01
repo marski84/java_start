@@ -6,15 +6,18 @@ import CinemaSystem.models.Ticket;
 
 public class CinemaService {
 
-    public void handleTicketSale(Client client, Movie movie) {
+    public Ticket handleTicketSale(Client client, Movie movie) {
         if (movie.getFreeSeats() == 0) {
             this.printInfo("Not free seats available!");
+            return null;
         } else if (client.getAge1() < movie.getAgeRequired()) {
             this.printInfo("Movie available for people over " +movie.getAgeRequired());
+            return null;
         } else {
             Ticket ticket = new Ticket(client, movie.getMovieTitle());
             movie.decreaseFreeSeats();
             this.confirmTicketPurchase(movie);
+            return ticket;
         }
 
     }

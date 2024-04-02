@@ -1,10 +1,12 @@
 package library.app;
 
+import library.io.DataReader;
 import library.model.Book;
 
 class Library {
     public static void main(String[] args) {
         final String appName = "Biblioteka v0.3";
+        DataReader dataReader = new DataReader();
 
         Book[] books = new Book[1000];
         books[0] = new Book("W pustyni i w puszczy", "Henryk Sienkiewicz", 2010, 296, "Greg",
@@ -19,5 +21,7 @@ class Library {
         books[0].printInfo();
         books[1].printInfo();
         books[2].printInfo();
+
+        dataReader.readAndCreateBook();
     }
 }

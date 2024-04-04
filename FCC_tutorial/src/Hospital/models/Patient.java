@@ -3,9 +3,9 @@ package Hospital.models;
 public class Patient {
     private String firstName;
     private String lastName;
-    private int pesel;
+    private String pesel;
 
-    public Patient(String firstName, String lastName, int pesel) {
+    public Patient(String firstName, String lastName, String pesel) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
@@ -27,11 +27,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public int getPesel() {
+    public String getPesel() {
         return pesel;
     }
 
-    public void setPesel(int pesel) {
+    public void setPesel(String pesel) {
         pesel = pesel;
     }
 }

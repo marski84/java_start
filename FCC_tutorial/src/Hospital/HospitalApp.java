@@ -11,11 +11,17 @@ public class HospitalApp {
         final int addPatient = 1;
         final int showPatients = 2;
         final int exit = 0;
+        Hospital hospital = new Hospital();
+
 
         while (true) {
-            Hospital hospital = new Hospital();
 
-            System.out.println("select mode:");
+            System.out.println("Dostępne opcje: ");
+            System.out.println("0 - wyjście z programu");
+            System.out.println("1 - dodanie pacjenta");
+            System.out.println("2 - wyświetlenie listy pacjentów");
+
+            System.out.print("Wybierz opcję: ");
             while(!reader.hasNextInt()) {
                 System.out.println("Not a valid mode id- please try again");
                 reader.next();

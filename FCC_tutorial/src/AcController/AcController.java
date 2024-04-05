@@ -1,6 +1,7 @@
 package AcController;
 
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AcController {
     private double actualTemperature;
@@ -9,7 +10,7 @@ public class AcController {
 
     AcController() {}
 
-    public void setTemperature() {
+    public void setTemperature() throws InterruptedException {
         System.out.println("What is actual temperature?");
         actualTemperature = this.getTemperatureValue();
         System.out.println("What is target temperature?");
@@ -32,6 +33,7 @@ public class AcController {
             this.setTemperature();
         } else if (userInput == 1) {
             System.out.println("start");
+            this.adjustTemp();
         }
 
     }
@@ -45,12 +47,36 @@ public class AcController {
         return input;
     }
 
-    private void validateTemp() {
+    private void validateTemp() throws InterruptedException {
         if (this.actualTemperature == this.targetTemperature) {
             this.actualTemperature = 0;
             this.targetTemperature = 0;
             System.out.println("Both values are equal");
             this.setTemperature();
+        }
+    }
+
+    private void adjustTemp() throws InterruptedException {
+        if (this.actualTemperature < this.targetTemperature) {
+            while (this.actualTemperature < this.targetTemperature) {
+                System.out.println("actual temp: " + actualTemperature);
+                actualTemperature += 0.5;
+                Thread.sleep(1000);
+                if (actualTemperature == targetTemperature) {
+                    System.out.println("target temp achieved: " + actualTemperature);
+                }
+            }
+        }
+
+        if (this.actualTemperature > this.targetTemperature) {
+            while (this.actualTemperature > this.targetTemperature) {
+                System.out.println("actual temp: " + actualTemperature);
+                actualTemperature -= 0.5;
+                Thread.sleep(1000);
+                if (actualTemperature == targetTemperature) {
+                    System.out.println("target temp achieved: " + actualTemperature);
+                }
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package Algorythms;
+package Algorythms.EvenOrOdd;
 
 public class EvenOrOddTest {
     public static void main(String[] args) {

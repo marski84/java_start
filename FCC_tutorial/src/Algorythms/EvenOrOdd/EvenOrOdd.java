@@ -1,4 +1,4 @@
-package Algorythms;
+package Algorythms.EvenOrOdd;
 
 import java.util.Scanner;
 

@@ -46,7 +46,7 @@ public class DataReader {
         return input;
     }
 
-    private int getIntData() {
+    public int getIntData() {
         while (!scanner.hasNextInt()) {
             System.out.println("Please provide a valid integer input!");
             scanner.next();
@@ -58,4 +58,7 @@ public class DataReader {
     }
 
 
+    public void close() {
+        scanner.close();
+    }
 }

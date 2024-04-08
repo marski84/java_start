@@ -3,7 +3,7 @@ package library.app;
 import library.io.DataReader;
 import library.model.Book;
 
-class Library {
+class LibraryApp {
     public static void main(String[] args) {
         final String appName = "Biblioteka v0.3";
         DataReader dataReader = new DataReader();
@@ -22,6 +22,7 @@ class Library {
         books[1].printInfo();
         books[2].printInfo();
 
-        dataReader.readAndCreateBook();
+        LibraryControl libControl = new LibraryControl();
+        libControl.controlLoop();
     }
 }

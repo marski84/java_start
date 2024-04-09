@@ -1,8 +1,8 @@
 package CoursePlatform;
 
 public class StationaryCourse extends Course {
-    String place;
-    int amountOfMeetings;
+    private String place;
+    private int amountOfMeetings;
 
     public StationaryCourse(String id, double price, String name, String description, String place, int amountOfMeetings) {
         super(id, price, name, description);

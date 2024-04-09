@@ -1,8 +1,8 @@
 package CoursePlatform;
 
 public class BootCamp extends Course{
-    String trainer;
-    int consultationHours;
+    private String trainer;
+    private int consultationHours;
 
     public BootCamp(String id, double price, String name, String description, String trainer, int consultationHours) {
         super(id, price, name, description);

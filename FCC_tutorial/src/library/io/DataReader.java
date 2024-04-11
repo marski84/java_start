@@ -1,6 +1,7 @@
 package library.io;
 
 import library.model.Book;
+import library.model.Magazine;
 
 import java.util.Scanner;
 
@@ -31,7 +32,35 @@ public class DataReader {
                 && bookPages != 0
                 && !bookPublisher.isEmpty()
         ) {
-            return new Book(bookTitle, bookAuthor, bookReleaseDate, bookPages, bookPublisher);
+            return new Book(bookTitle, bookPublisher, bookReleaseDate, bookAuthor,  bookPages, bookPublisher);
+        }
+        return null;
+    }
+
+//(String title, String publisher, int releaseDate, int month, int day, String language)
+    public Magazine readAndCreateMagazine() {
+        System.out.println("Title:");
+        String magazineTitle = getStringData();
+        System.out.println("Publisher::");
+        String magazinePublisher = getStringData();
+        System.out.println("releaseDate (YYYY):");
+        int magazineReleaseDate = getIntData();
+        System.out.println("Month:");
+        int magazineMonth = getIntData();
+        System.out.println("Day:");
+        int magazineDay = getIntData();
+        System.out.println("Language:");
+        String magazineLanguage = getStringData();
+
+        if (
+                        !magazineTitle.isEmpty()
+                        && !magazinePublisher.isEmpty()
+                        && magazineReleaseDate != 0
+                        && magazineMonth != 0
+                        && magazineDay != 0
+                        && !magazineLanguage.isEmpty()
+        ) {
+            return new Magazine(magazineTitle, magazinePublisher, magazineReleaseDate, magazineMonth, magazineDay, magazineLanguage);
         }
         return null;
     }

@@ -11,8 +11,6 @@ public class GameController {
     private int startingTeamIndex;
     private boolean firstTeamTurn;
 
-    private boolean gameContinues = true;
-
     public GameController(Team first, Team second) {
         teamsInTournament[0] = first;
         teamsInTournament[1] = second;
@@ -57,17 +55,11 @@ public class GameController {
         System.out.println("damage " + defendingTeamDamage);
         if (defendingTeamDamage > 0) {
             this.teamsInTournament[defendingTeamIndex].modifyHealth(defendingTeamDamage);
-            System.out.println(teamsInTournament[defendingTeamIndex].getHealth());
         }
-        System.out.println("health after attack " + teamsInTournament[defendingTeamIndex].getHealth());
-
         if (teamIndex == 0) {
             this.firstTeamTurn = false;
         } else {
             this.firstTeamTurn = true;
         }
     }
-
-
-
 }

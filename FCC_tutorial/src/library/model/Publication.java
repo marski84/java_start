@@ -1,5 +1,7 @@
 package library.model;
 
+import java.util.Objects;
+
 public class Publication {
     private String title;
     private String publisher;
@@ -33,5 +35,26 @@ public class Publication {
 
     public void setReleaseDate(int releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Publication{" +
+                "title='" + title + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", releaseDate=" + releaseDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Publication that)) return false;
+        return releaseDate == that.releaseDate && Objects.equals(title, that.title) && Objects.equals(publisher, that.publisher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, publisher, releaseDate);
     }
 }

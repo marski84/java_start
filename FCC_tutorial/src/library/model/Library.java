@@ -30,7 +30,7 @@ public class Library {
     public void printMagazines() {
         for(int i=0; i< publicationsNumber; i++) {
             if (publications[i] instanceof Magazine) {
-                ((Magazine) publications[i]).printInfo();
+                ((Magazine) publications[i]).toString();
             }
         }
     }
@@ -38,7 +38,7 @@ public class Library {
     public void printBooks() {
         for(int i=0; i< publicationsNumber; i++) {
             if (publications[i] instanceof Book) {
-                ((Book) publications[i]).printInfo();
+                ((Book) publications[i]).toString();
             }
         }
     }

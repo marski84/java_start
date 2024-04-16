@@ -1,5 +1,7 @@
 package library.model;
 
+import java.util.Objects;
+
 public class Book extends Publication {
     private String author;
     private int pages;
@@ -42,13 +44,24 @@ public class Book extends Publication {
         this.isbn = isbn;
     }
 
-    public void printInfo() {
-        String info = this.getTitle() + "; " + this.getAuthor() + "; " + this.getReleaseDate() + "; "
-                + pages + "; " + this.getPublisher();
+    @Override
+    public String toString() {
+        return "Book{" +
+                "author='" + author + '\'' +
+                ", pages=" + pages +
+                ", isbn='" + isbn + '\'' +
+                '}';
+    }
 
-        if (this.isbn != null) {
-            info = info + "; " + isbn;
-        }
-        System.out.println(info);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book book)) return false;
+        return pages == book.pages && Objects.equals(author, book.author) && Objects.equals(isbn, book.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(author, pages, isbn);
     }
 }

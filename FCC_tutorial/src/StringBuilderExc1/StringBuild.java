@@ -24,7 +24,6 @@ public class StringBuild {
     }
 
     private char getLastChar(String word) {
-        System.out.println(word);
         int wordLength = word.length() -1;
         return word.charAt(wordLength);
     }

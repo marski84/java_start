@@ -9,7 +9,7 @@ public class Calculator {
     private final String MULTIPLY = "*";
     private final String DIVIDE = "/";
     private final String EQUALS = "=";
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
 
 

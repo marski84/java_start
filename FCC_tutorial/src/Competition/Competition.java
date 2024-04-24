@@ -26,8 +26,9 @@ class Competition {
 
     }
 
+
     private Exception validateAgeLimit(Participant participant) throws AgeViolationException {
-        if (participant.getAge() < ageLimit) {
+        if (Object.class.isInstance(participant) && participant.getAge() < ageLimit) {
             throw new AgeViolationException("Participant age out of limits!");
         }
         return null;
@@ -42,7 +43,7 @@ class Competition {
 
     private Exception validateParticipantUniqeness(Participant participant) throws DuplicateException {
         for (Participant presentParticipant : participants) {
-            if (presentParticipant != null) {
+            if (Object.class.isInstance(participant) && presentParticipant != null) {
                 if (presentParticipant.getDocumentId().equals(participant.getDocumentId())) {
                     throw new DuplicateException("Particant already added!");
                 }

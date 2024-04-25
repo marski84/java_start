@@ -1,59 +1,58 @@
 package library.io;
 
+import library.app.Option;
+import library.exceptions.NoSuchOptionException;
 import library.model.Book;
 import library.model.Magazine;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DataReader {
     private Scanner scanner = new Scanner(System.in);
+    private ConsolePrinter consolePrinter = new ConsolePrinter();
 
     public Book readAndCreateBook() {
-        System.out.println("Title:");
+        consolePrinter.printLine("Title:");
         String bookTitle = getStringData();
-        System.out.println("Author:");
+        consolePrinter.printLine("Author:");
         String bookAuthor = getStringData();
-        System.out.println("releaseDate (YYYY):");
+        consolePrinter.printLine("releaseDate (YYYY):");
         int bookReleaseDate = getIntData();
-        System.out.println("Amount of pages:");
+        consolePrinter.printLine("Amount of pages:");
         int bookPages = getIntData();
-        System.out.println("Book publisher:");
+        consolePrinter.printLine("Book publisher:");
         String bookPublisher = getStringData();
-
-
-        System.out.println(bookTitle);
-        System.out.println(bookPublisher);
-        System.out.println(bookPages);
 
         if (
                 !bookTitle.isEmpty()
-                && !bookAuthor.isEmpty()
-                && bookReleaseDate != 0
-                && bookPages != 0
-                && !bookPublisher.isEmpty()
+                        && !bookAuthor.isEmpty()
+                        && bookReleaseDate != 0
+                        && bookPages != 0
+                        && !bookPublisher.isEmpty()
         ) {
-            return new Book(bookTitle, bookPublisher, bookReleaseDate, bookAuthor,  bookPages, bookPublisher);
+            return new Book(bookTitle, bookPublisher, bookReleaseDate, bookAuthor, bookPages, bookPublisher);
         }
         return null;
     }
 
-//(String title, String publisher, int releaseDate, int month, int day, String language)
+    //(String title, String publisher, int releaseDate, int month, int day, String language)
     public Magazine readAndCreateMagazine() {
-        System.out.println("Title:");
+        consolePrinter.printLine("Title:");
         String magazineTitle = getStringData();
-        System.out.println("Publisher::");
+        consolePrinter.printLine("Publisher::");
         String magazinePublisher = getStringData();
-        System.out.println("releaseDate (YYYY):");
+        consolePrinter.printLine("releaseDate (YYYY):");
         int magazineReleaseDate = getIntData();
-        System.out.println("Month:");
+        consolePrinter.printLine("Month:");
         int magazineMonth = getIntData();
-        System.out.println("Day:");
+        consolePrinter.printLine("Day:");
         int magazineDay = getIntData();
-        System.out.println("Language:");
+        consolePrinter.printLine("Language:");
         String magazineLanguage = getStringData();
 
         if (
-                        !magazineTitle.isEmpty()
+                !magazineTitle.isEmpty()
                         && !magazinePublisher.isEmpty()
                         && magazineReleaseDate != 0
                         && magazineMonth != 0
@@ -71,19 +70,17 @@ public class DataReader {
             scanner.next();
         }
         String input = scanner.nextLine();
-        System.out.println(input);
         return input;
     }
 
     public int getIntData() {
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please provide a valid integer input!");
-            scanner.next();
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw e;
+        } finally {
+            scanner.nextLine();
         }
-        int input = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println(input);
-        return input;
     }
 
 

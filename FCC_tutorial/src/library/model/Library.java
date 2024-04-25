@@ -9,36 +9,33 @@ public class Library {
 
 
     public void addBook(Book book) {
-        if(publicationsNumber < MAX_PUBLICATIONS) {
-            publications[publicationsNumber] = book;
-            publicationsNumber++;
-        } else {
-            System.out.println("Maksymalna liczba książek została osiągnięta");
-        }
-
+        addPublication(book);
     }
 
-    public void addMagazine (Magazine magazine) {
-        if(publicationsNumber < MAX_PUBLICATIONS) {
-            publications[publicationsNumber] = magazine;
-            publicationsNumber++;
-        } else {
-            System.out.println("Maksymalna liczba magazynów została osiągnięta");
+    public void addMagazine(Magazine magazine) {
+        addPublication(magazine);
+    }
+
+    private void addPublication(Publication publication) {
+        if (publicationsNumber >= MAX_PUBLICATIONS) {
+            throw new ArrayIndexOutOfBoundsException("Max publications exceeded " + MAX_PUBLICATIONS    );
         }
+        publications[publicationsNumber] = publication;
+        publicationsNumber++;
     }
 
     public void printMagazines() {
-        for(int i=0; i< publicationsNumber; i++) {
+        for (int i = 0; i < publicationsNumber; i++) {
             if (publications[i] instanceof Magazine) {
-                ((Magazine) publications[i]).toString();
+                publications[i].toString();
             }
         }
     }
 
     public void printBooks() {
-        for(int i=0; i< publicationsNumber; i++) {
+        for (int i = 0; i < publicationsNumber; i++) {
             if (publications[i] instanceof Book) {
-                ((Book) publications[i]).toString();
+                publications[i].toString();
             }
         }
     }

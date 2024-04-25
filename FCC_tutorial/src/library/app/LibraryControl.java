@@ -1,9 +1,13 @@
 package library.app;
 
+import library.exceptions.NoSuchOptionException;
+import library.io.ConsolePrinter;
 import library.io.DataReader;
 import library.model.Book;
 import library.model.Library;
 import library.model.Magazine;
+
+import java.util.InputMismatchException;
 
 import static library.app.Option.ADD_BOOK;
 
@@ -13,12 +17,28 @@ public class LibraryControl {
     private DataReader dataReader = new DataReader();
 
     private Library library = new Library();
+    private ConsolePrinter consolePrinter = new ConsolePrinter();
 
     public void controlLoop() {
-        Option option;
+        Option option = null;
         do {
-            printOptions();
-            option = Option.createFromInt(dataReader.getIntData());
+            while (option == null) {
+                try{
+                    int input = 0;
+                    printOptions();
+                    while (input == 0) {
+                        try {
+                            input = dataReader.getIntData();
+                        } catch (InputMismatchException e) {
+                            System.out.println("podaj liczbę!");
+                        }
+                    }
+                    option = Option.createFromInt(input);
+                } catch (NoSuchOptionException e) {
+                    System.out.println(e);
+                }
+            }
+
             switch (option) {
                 case ADD_BOOK:
                     addBook();
@@ -44,7 +64,7 @@ public class LibraryControl {
     private void printOptions() {
         System.out.println("Wybierz opcję: ");
         for (Option option : Option.values()) {
-            System.out.println(option);
+            consolePrinter.printLine(option.toString());
         }
     }
 

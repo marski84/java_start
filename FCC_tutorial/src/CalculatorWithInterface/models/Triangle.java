@@ -25,4 +25,16 @@ public class Triangle implements Calculate {
     public double calculateArea() {
         return a + b + c;
     }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                ", h=" + h +
+                ", perimeter=" + calculatePerimeter() +
+                ", area=" + calculateArea() +
+                '}';
+    }
 }

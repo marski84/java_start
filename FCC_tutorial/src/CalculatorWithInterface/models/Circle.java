@@ -15,8 +15,19 @@ public class Circle implements Calculate {
         return PI * r * 2;
     }
 
+
+
     @Override
     public double calculateArea() {
         return PI * r * r;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "PI=" + PI +
+                ", r=" + r +
+                ", perimeter=" + calculatePerimeter() +
+                ", area=" + calculateArea();
     }
 }

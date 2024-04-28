@@ -1,44 +1,108 @@
 package CalculatorWithInterface;
 
-import CalculatorWithInterface.models.Circle;
-import CalculatorWithInterface.models.DataReader;
-import CalculatorWithInterface.models.Rectangle;
-import CalculatorWithInterface.models.Triangle;
+import CalculatorWithInterface.exceptions.NotValidChoice;
+import CalculatorWithInterface.models.*;
 
 import static CalculatorWithInterface.interfaces.PrintData.printInfo;
 
 public class Calculator {
     private DataReader dataReader = new DataReader();
-//    1. interfejs Triangle z default metodami
-//    2. interfejs Rectangle z default metodami
-//    3. interfejs Circle z default metodami + PI
-//    4. klasa kontrolera z przeliczeniami
-//    5. klasa DataReader
+    private final int NO_SHAPE_SELECTED = 0;
 
-    public Circle createCircle() {
+    public void init() throws NotValidChoice {
+        int userChoice = NO_SHAPE_SELECTED;
+        printInfo("Wybierz kształt figury: ");
+        for (ShapeType shape: ShapeType.values()) {
+            printInfo(shape + ": " + shape.getValue());
+        }
+        while (userChoice == 0) {
+            try {
+                userChoice = dataReader.getUserInputAsInt();
+                boolean isValid = false;
+                System.out.println(userChoice);
+                for (int i = 0; i < ShapeType.values().length; i++) {
+                    if (userChoice == ShapeType.values()[i].getValue()) {
+                        isValid = true;
+                        break;
+                    }
+                    if (i == ShapeType.values().length -1 && !isValid) {
+                        throw new NotValidChoice("not a valid choice!");
+                    }
+                }
+            } catch (NotValidChoice e) {
+                printInfo(String.valueOf(e));
+            }
+        }
+
+        ShapeType.CIRCLE.getValue();
+
+//        if (userChoice == ShapeType.CIRCLE.getValue()) {
+//            this.createCircle();
+//        }
+//        if (userChoice == ShapeType.RECTANGLE.getValue()) {
+//            this.createRectangle();
+//        }
+//        if (userChoice == ShapeType.TRIANGLE.getValue()) {
+//            this.createTriangle();
+//        }
+        switch (getShapeType(userChoice)) {
+            case CIRCLE:
+                this.createCircle();
+                break;
+            case TRIANGLE:
+                this.createRectangle();
+                break;
+            case RECTANGLE:
+                this.createTriangle();
+                break;
+            default:
+                throw new NotValidChoice("not a valid choice!");
+        }
+
+
+
+
+    }
+
+    private Circle createCircle() {
         printInfo("podaj wartość dla prom");
-        double a = dataReader.getUserInput();
-        return new Circle(a);
+        double a = dataReader.getUserInputAsDouble();
+        Circle circle = new Circle(a);
+        printInfo(circle.toString());
+        return circle;
     }
-    public Triangle createTriangle() {
+    private Triangle createTriangle() {
         printInfo("wartość a");
-        double a = dataReader.getUserInput();
+        double a = dataReader.getUserInputAsDouble();
         printInfo("wartość b");
-        double b = dataReader.getUserInput();
+        double b = dataReader.getUserInputAsDouble();
         printInfo("wartość c");
-        double c = dataReader.getUserInput();
+        double c = dataReader.getUserInputAsDouble();
         printInfo("wartość h");
-        double h = dataReader.getUserInput();
+        double h = dataReader.getUserInputAsDouble();
 
-        return new Triangle(a, b, c, h);
+        Triangle triangle = new Triangle(a, b, c, h);
+        printInfo(triangle.toString());
+        return triangle;
     }
-    public Rectangle createRectangle() {
+    private Rectangle createRectangle() {
         printInfo("wartość a");
-        double a = dataReader.getUserInput();
+        double a = dataReader.getUserInputAsDouble();
         printInfo("wartość b");
-        double b = dataReader.getUserInput();
+        double b = dataReader.getUserInputAsDouble();
 
-        return new Rectangle(a, b);
+        Rectangle rectangle = new Rectangle(a, b);
+        printInfo(rectangle.toString());
+        return rectangle;
+    }
+
+    public ShapeType getShapeType(int value) throws NotValidChoice {
+        for (ShapeType type : ShapeType.values()) {
+            if (type.getValue() == value) {
+                return type;
+            }
+        }
+        throw new NotValidChoice("not a valid choice!");
     }
 
 }

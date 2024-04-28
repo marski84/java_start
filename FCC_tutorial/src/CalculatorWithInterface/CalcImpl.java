@@ -1,14 +1,20 @@
 package CalculatorWithInterface;
 
+import CalculatorWithInterface.exceptions.NotValidChoice;
 import CalculatorWithInterface.models.Circle;
 import CalculatorWithInterface.interfaces.PrintData;
+import CalculatorWithInterface.models.ShapeType;
 
 public class CalcImpl implements PrintData {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        Circle circle = calculator.createCircle();
-        System.out.println(circle.calculatePerimeter());
 
+        try {
+            calculator.init();
+        }
+        catch (NotValidChoice e) {
+            System.out.println(e);
+        }
 
 
     }

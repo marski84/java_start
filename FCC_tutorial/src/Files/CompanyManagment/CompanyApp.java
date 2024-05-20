@@ -1,7 +1,6 @@
 package Files.CompanyManagment;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,12 +11,13 @@ public class CompanyApp {
   private DataReader dataReader = new DataReader();
 
   public void getEmployeeData() {
+//    getEmployeeDataFromFile();
+
     if (file.exists()) {
       try {
         file.createNewFile();
-        System.out.println("okok");
         while (company.getAmountOfEmployees() != company.getMAX_EMPLOYEES()) {
-          try{
+          try {
             Employee employee = registerEmployee();
             company.addEmployee(employee);
           } catch (Exception e) {
@@ -27,13 +27,9 @@ public class CompanyApp {
       } catch (IOException e) {
         System.out.println(e);
       }
-
-      System.out.println();
-
-
     }
-
-
+    saveEmployeeDataToFile(company.getEmployees());
+    getEmployeeDataFromFile();
   }
 
   public Employee registerEmployee() {
@@ -44,11 +40,6 @@ public class CompanyApp {
       String lastname = dataReader.getValidStringInput();
       System.out.println("Employee salary:");
       double salary = dataReader.getValidDoubleInput();
-
-      System.out.println(firstName);
-      System.out.println(lastname);
-      System.out.println(salary);
-
       Employee newEmployee = new Employee(firstName, lastname, salary);
       System.out.println(newEmployee.getLastName());
       return newEmployee;
@@ -58,11 +49,30 @@ public class CompanyApp {
     }
   }
 
-  private void getCompanyDataFromFile() {}
-
-  private void saveCompanyDataToFile() {
-
+  private void getEmployeeDataFromFile() {
+    Employee employee = null;
+    try (var fis = new FileInputStream(FILENAME);
+    var objectStream = new ObjectInputStream(fis) ) {
+      employee = (Employee) objectStream.readObject();
+      System.out.println(employee.getLastName());
+    } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    } catch (ClassNotFoundException e) {
+        throw new RuntimeException(e);
+    }
   }
 
+  private void saveEmployeeDataToFile(Employee[] employeeData) {
+    try (var fs = new FileOutputStream(FILENAME);
+        var objectStream = new ObjectOutputStream(fs)) {
+      objectStream.writeObject(employeeData);
 
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }

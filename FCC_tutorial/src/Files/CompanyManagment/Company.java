@@ -21,4 +21,8 @@ public class Company {
     public int getMAX_EMPLOYEES() {
         return MAX_EMPLOYEES;
     }
+
+    public Employee[] getEmployees() {
+        return employees;
+    }
 }

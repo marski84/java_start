@@ -1,7 +1,9 @@
 package Files.CompanyManagment;
 
+import java.io.IOException;
+
 public class App {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 //    Company newCompany = new Company();
 //    Employee a = new Employee("a", "a", 5000.0);
 //    Employee b = new Employee("b", "b", 9000.0);
@@ -16,6 +18,6 @@ public class App {
     //        }
 
     CompanyApp companyApp = new CompanyApp();
-    companyApp.getEmployeeData();
+    companyApp.init();
   }
 }

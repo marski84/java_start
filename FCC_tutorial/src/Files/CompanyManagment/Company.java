@@ -18,6 +18,10 @@ public class Company {
         return amountOfEmployees;
     }
 
+    public void setEmployees(Employee[] employees) {
+        this.employees = employees;
+    }
+
     public int getMAX_EMPLOYEES() {
         return MAX_EMPLOYEES;
     }

@@ -2,7 +2,6 @@ package Files.CompanyManagment;
 
 import java.io.*;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class CompanyApp {
   private final String FILENAME = "companyData.txt";
@@ -10,26 +9,30 @@ public class CompanyApp {
   private Company company = new Company();
   private DataReader dataReader = new DataReader();
 
-  public void getEmployeeData() {
-//    getEmployeeDataFromFile();
-
-    if (file.exists()) {
-      try {
-        file.createNewFile();
-        while (company.getAmountOfEmployees() != company.getMAX_EMPLOYEES()) {
-          try {
-            Employee employee = registerEmployee();
-            company.addEmployee(employee);
-          } catch (Exception e) {
-            System.out.println(e);
-          }
-        }
-      } catch (IOException e) {
-        System.out.println(e);
-      }
+  public void init() throws IOException {
+    if (!file.exists()) {
+      createNewFileAndRegisterEmployees();
+    } else {
+      loadCompanyFromFile();
     }
-    saveEmployeeDataToFile(company.getEmployees());
-    getEmployeeDataFromFile();
+  }
+
+  private void loadCompanyFromFile() {
+    company.setEmployees(getCompanyEmployeesDataFromFile());
+    System.out.println(company.getEmployees()[0].getSalary());
+  }
+
+  private void createNewFileAndRegisterEmployees() throws IOException {
+    file.createNewFile();
+    while (company.getAmountOfEmployees() != company.getMAX_EMPLOYEES()) {
+      try {
+        Employee employee = registerEmployee();
+        company.addEmployee(employee);
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+      saveEmployeeDataToFile(company.getEmployees());
+    }
   }
 
   public Employee registerEmployee() {
@@ -49,26 +52,25 @@ public class CompanyApp {
     }
   }
 
-  private void getEmployeeDataFromFile() {
-    Employee employee = null;
+  private Employee[] getCompanyEmployeesDataFromFile() {
+    Employee[] employee = null;
     try (var fis = new FileInputStream(FILENAME);
-    var objectStream = new ObjectInputStream(fis) ) {
-      employee = (Employee) objectStream.readObject();
-      System.out.println(employee.getLastName());
+        var objectStream = new ObjectInputStream(fis)) {
+      employee = (Employee[]) objectStream.readObject();
     } catch (FileNotFoundException e) {
-        throw new RuntimeException(e);
+      throw new RuntimeException(e);
     } catch (IOException e) {
-        throw new RuntimeException(e);
+      throw new RuntimeException(e);
     } catch (ClassNotFoundException e) {
-        throw new RuntimeException(e);
+      throw new RuntimeException(e);
     }
+    return employee;
   }
 
   private void saveEmployeeDataToFile(Employee[] employeeData) {
     try (var fs = new FileOutputStream(FILENAME);
         var objectStream = new ObjectOutputStream(fs)) {
       objectStream.writeObject(employeeData);
-
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } catch (IOException e) {

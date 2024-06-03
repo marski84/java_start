@@ -25,9 +25,28 @@ public class UserInputHandler {
     }
 
 
+    public List<Integer> getNonNegativeInput() {
+        System.out.println("Please enter a non negative number which is dividable by 5");
+        String input = scanner.nextLine();
+        if (!validateIfInputNonNegativeAndDivididable(input)) {
+            System.out.println("ok");
+            return list;
+        } else {
+            list.add(Integer.valueOf(input));
+            System.out.println(list);
+            return getNonNegativeInput();
+        }
+    }
+
+
     private boolean validateInput(String input) {
         String regex = "\\d+";
         return input.matches(regex);
+    }
 
+    private boolean validateIfInputNonNegativeAndDivididable(String input) {
+        validateInput(input);
+        System.out.println(input + " " + (Integer.valueOf(input) < 0));
+        return Integer.valueOf(input) > 0 &&  Integer.valueOf(input) % 5 == 0;
     }
 }

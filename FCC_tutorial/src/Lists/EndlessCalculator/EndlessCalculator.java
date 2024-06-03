@@ -1,8 +1,8 @@
-package Lists;
+package Lists.EndlessCalculator;
+
+import Lists.UserInputHandler;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class EndlessCalculator {
     UserInputHandler userInputHandler = new UserInputHandler();

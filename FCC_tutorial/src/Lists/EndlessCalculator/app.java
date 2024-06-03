@@ -1,4 +1,6 @@
-package Lists;
+package Lists.EndlessCalculator;
+
+import Lists.UserInputHandler;
 
 public class app {
     public static void main(String[] args) {
